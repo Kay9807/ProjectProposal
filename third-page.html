@@ -137,8 +137,7 @@
         // Function to send email using EmailJS
         function sendEmail() {
 
-            const selectedDate = new Date().toLocaleDateString(); // Get current date
-
+            const selectedDate = localStorage.getItem('selectedDate');
             const templateParams = {
                 selectedFood: selectedFood,
                 selectedDate: selectedDate
