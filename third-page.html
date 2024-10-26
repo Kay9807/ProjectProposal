@@ -144,7 +144,11 @@
                 selectedDate: selectedDate
             };
 
-            emailjs.send('service_myu9mmz', 'template_murdp4p', templateParams);
+            emailjs.send('service_myu9mmz', 'template_murdp4p', templateParams).then(function (response) {
+                console.log('Email sent successfully:', response.status, response.text);
+                // Only navigate after email is successfully sent
+                window.location.href = 'fourth-page.html';
+            })
         }
     </script>
 </body>
