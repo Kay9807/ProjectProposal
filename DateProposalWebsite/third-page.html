@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Options</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #584ab542;
+            font-family: Arial, sans-serif;
+            color: #6b5b95;
+        }
+
+        h1 {
+            color: #8d44add4;
+            margin-top: 20px;
+        }
+
+        .food-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .food-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            color: #6a6a6a;
+            cursor: pointer;
+        }
+
+        .food-option img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #e3e3e3;
+            transition: border-color 0.3s;
+        }
+
+        .food-option.selected img {
+            border-color: #8e44ad;
+        }
+
+        .continue-button {
+            background-color: #8e44ad;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        
+        .gif {
+            width: 300px;
+            height: auto;
+            margin-bottom: 20px;
+            margin-top: -42px;
+        }
+    </style>
+    <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+    (function(){
+      emailjs.init({
+        publicKey: "hl6xALBcdM572HRgo",
+      });
+    })();
+</script>
+</head>
+<body>
+
+    <img src="./images/lunch.gif" alt="Fun GIF" class="gif"> 
+    <h1>What do you want to eat?</h1>
+    <div class="food-container">
+        <div class="food-option" onclick="selectFood(this)">
+            <img src="./images/mugg&bean.png" alt="Mugg & Bean">
+            <p>Mugg & Bean</p>
+        </div>
+        <div class="food-option" onclick="selectFood(this)">
+            <img src="./images/Lupa Osteria.png" alt="Lupa Osteria">
+            <p>Lupa Osteria <br> 
+                Pizza & Pasta
+            </p>
+        </div>
+        <div class="food-option" onclick="selectFood(this)">
+            <img src="./images/RocoMamas.png" alt="RocoMamas">
+            <p>RocoMamas</p>
+        </div>
+        <div class="food-option" onclick="selectFood(this)">
+            <img src="./images/wimpy.jpg" alt="Wimpy">
+            <p>Wimpy</p>
+        </div>
+        <div class="food-option" onclick="selectFood(this)">
+            <img src="./images/panarottis.jpg" alt="panarottis">
+            <p>Panarottis</p>
+        </div>
+    </div>
+
+    <button class="continue-button" onclick="continueToNext()">Continue</button>
+
+    <script>
+        let selectedFood = null; // Variable to track selected food
+
+        // Function to handle food selection
+        function selectFood(selectedOption) {
+            // Remove 'selected' class from all food options
+            const foodOptions = document.querySelectorAll('.food-option');
+            foodOptions.forEach(option => {
+                option.classList.remove('selected');
+            });
+
+            // Add 'selected' class to the clicked food option
+            selectedOption.classList.add('selected');
+            selectedFood = selectedOption.querySelector('p').innerText; // Store the selected option text
+        }
+
+        // Function to handle continuing to the next page and sending email
+        function continueToNext() {
+            if (selectedFood) {
+                sendEmail(); // Send email before going to the next page
+            } else {
+                alert("Please select something Nash 🙄."); // Alert if none selected
+            }
+        }
+
+        // Function to send email using EmailJS
+        function sendEmail() {
+
+            const selectedDate = new Date().toLocaleDateString(); // Get current date
+
+            const templateParams = {
+                selectedFood: selectedFood,
+                selectedDate: selectedDate
+            };
+
+            emailjs.send('service_myu9mmz', 'template_murdp4p', templateParams);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Your Excitement</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #584ab542;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.3s; /* Smooth transition for background color */
+        }
+        .container {
+            text-align: center;
+        }
+        .excited {
+            width: 390px;
+            height: 355px;            
+            margin-bottom: 20px;
+        }
+        .rating-text {
+            font-size: 20px;
+            color: #6d5ed3;
+            margin-bottom: 10px;
+        }
+        .slider {
+            width: 300px;
+            margin-bottom: 20px;
+        }
+        .continue-btn {
+            background-color: #6d5ed3;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .continue-btn:hover {
+            background-color: #584ab5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="./images/excited.gif" alt="Excited dance" class="excited">
+        <div class="rating-text">Lastly, how excited are you?</div>
+        <input type="range" class="slider" min="0" max="10" value="5" id="excitedSlider">
+        <button class="continue-btn" id="continueBtn" disabled>Continue (｡♥‿♥｡)</button>
+    </div>
+
+    <script>
+        const slider = document.getElementById('excitedSlider');
+        const continueBtn = document.getElementById('continueBtn');
+
+        // Enable the continue button when slider is dragged to the end
+        slider.addEventListener('input', () => {
+            if (slider.value == slider.max) {
+                continueBtn.disabled = false; // Enable button when at max
+            } else {
+                continueBtn.disabled = true; // Disable button otherwise
+            }
+        });
+
+        continueBtn.addEventListener('click', startDiscoEffect);
+
+        function startDiscoEffect() {
+            const colors = [
+                "#ff0000", "#00ff00", "#0000ff", 
+                "#ffff00", "#ff00ff", "#00ffff", 
+                "#ff6600", "#9900cc", "#33cc33", 
+                "#cc0066", "#3399ff", "#ffcc00",
+                "#6600cc", "#cc6600", "#0066cc"
+            ]; // Expanded array of colors
+            let i = 0;
+
+            // Change background color rapidly to create a disco effect
+            const discoInterval = setInterval(() => {
+                document.body.style.backgroundColor = colors[i % colors.length];
+                i++;
+            }, 200); // Change color every 200ms
+
+            // Stop the disco effect after 5 seconds and redirect to the next page
+            setTimeout(() => {
+                clearInterval(discoInterval);
+                document.body.style.backgroundColor = "#584ab542"; // Reset to original background color
+                window.location.href = 'fifth-page.html'; // Navigate to the next page
+            }, 5000); // Change color for 5 seconds
+        }
+    </script>
+</body>
+</html>

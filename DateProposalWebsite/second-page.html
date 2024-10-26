@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Date</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #584ab542;
+            font-family: Arial, sans-serif;
+            color: #6b5b95;
+        }
+        .question {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .gif {
+            width: 300px; /* Adjust the width of the GIF */
+            height: 350px; /* Maintain aspect ratio */
+            margin-bottom: 20px; /* Space between GIF and question */
+            margin-top: -98px;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            background-color: #8e44ad;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <img src="./images/free Tonight.gif" alt="Free Tonight GIF" class="gif"> 
+    <div class="question">When are you free?</div>
+    <input type="datetime-local" id="datePicker" required>
+    <button class="button" onclick="checkDate()">Click Me</button>
+
+    <script>
+        const disabledDates = ['2024-11-02', '2024-11-03']; // Disabled dates
+
+        document.getElementById('datePicker').addEventListener('change', function() {
+            const selectedDate = this.value.slice(0, 10); // Get only the date part (YYYY-MM-DD)
+
+            // Check if the selected date is in the disabled list or a weekend
+            const dateObj = new Date(selectedDate);
+            const day = dateObj.getDay(); // 0: Sunday, 6: Saturday
+
+            if (disabledDates.includes(selectedDate) || day === 0 || day === 6) {
+                alert("Not available this weekend Nash. Please choose another date & time.");
+                this.value = ''; // Clear the input
+            }
+        });
+
+        function checkDate() {
+            const date = document.getElementById('datePicker').value;
+            if (date) {
+                localStorage.setItem('selectedDate', date); // Store selected date in localStorage
+                window.location.href = 'third-page.html';
+            } else {
+                alert("Please select a date Nash 🙄.");
+            }
+        }
+    </script>
+</body>
+</html>
