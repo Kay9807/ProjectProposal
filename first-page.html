@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Go Out With Me?</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #584ab542;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        .heart-icon {
+            color: #d773d5;
+            font-size: 24px;
+        }
+        .question {
+            font-size: 22px;
+            color: #6d5ed3;
+            margin-bottom: 20px;
+        }
+        .gif {
+            width: 300px; /* Adjust the width of the GIF */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 20px; /* Space between GIF and question */
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+            margin-top: 10px
+        }
+        .yes-btn, .no-btn {
+            background-color: #6d5ed3;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .yes-btn:hover {
+            background-color: #584ab5;
+        }
+        .no-btn {
+            transition: left 0.2s, top 0.2s; /* Smooth movement */
+        }
+        .ps-note {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #888;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+         <img src="./images/rose.gif" alt="Rose GIF" class="gif"> 
+        <div class="heart-icon">💜</div>
+        <div class="question">So Nash , would you like to go out with me on a date?</div>
+        <div class="button-container">
+            <button class="yes-btn" id="yesBtn">Yes</button>
+            <button class="no-btn" id="noBtn">No</button>
+        </div>
+        <div class="ps-note">P.S. I dare you to click No Nash 😉</div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        
+        // Redirect to second-page.html when "Yes" is clicked
+        yesBtn.addEventListener('click', () => {
+            window.location.href = 'second-page.html';
+        });
+
+        // Move "No" button to a random position on hover
+        noBtn.addEventListener('mouseover', () => {
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            
+            // Calculate random positions within viewport limits
+            const randomX = Math.floor(Math.random() * (viewportWidth - noBtn.offsetWidth));
+            const randomY = Math.floor(Math.random() * (viewportHeight - noBtn.offsetHeight));
+            
+            // Position the "No" button absolutely to move freely across the viewport
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = `${randomX}px`;
+            noBtn.style.top = `${randomY}px`;
+        });
+    </script>
+</body>
+</html>
